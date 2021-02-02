@@ -3,7 +3,6 @@ pipeline {
      environment {
         DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
         // ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        // SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     }
     stages {
         stage('Back-end') {
@@ -27,6 +26,11 @@ pipeline {
                     sh 'npm run lint'
                 }
             }
+        }
+    }
+    post {
+        always {
+            slackSend color: "good", message: "Message from Jenkins Pipeline, I did it"
         }
     }
 }
