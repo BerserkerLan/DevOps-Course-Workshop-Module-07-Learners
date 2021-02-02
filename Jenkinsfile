@@ -1,3 +1,10 @@
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+def getBuildUser() {
+    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+}
 pipeline {
     agent any
      environment {
@@ -34,7 +41,11 @@ pipeline {
         //     docker { image 'alpine:latest' }
         // }
         always {
-            sh 'curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"webhookbot\", \"text\": \"This is posted to #general and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/T01LV3R105S/B01'
+            script {
+                BUILD_USER = getBuildUser()
+            }
+            echo 'Hi'
+            slackSend channel: "#general", color: COLOR_MAP[currentBuild.currentResult], message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
         }
     }
 }
