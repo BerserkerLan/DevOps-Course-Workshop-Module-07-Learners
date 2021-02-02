@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    // agent none
      environment {
         DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
         SLACK_WEBHOOK_URL = credentials("SLACK_WEBHOOK_URL")
@@ -30,9 +30,9 @@ pipeline {
         }
     }
     post {
-        agent {
-            docker { image 'alpine:latest' }
-        }
+        // agent {
+        //     docker { image 'alpine:latest' }
+        // }
         always {
             sh 'curl -X POST --data-urlencode "payload={\"channel\": \"#general\", \"username\": \"webhookbot\", \"text\": \"This is posted to #general and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/T01LV3R105S/B01'
         }
