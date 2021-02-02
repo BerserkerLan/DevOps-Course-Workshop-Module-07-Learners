@@ -1,5 +1,5 @@
 pipeline {
-    // agent none
+    agent any
      environment {
         DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
         SLACK_WEBHOOK_URL = credentials("SLACK_WEBHOOK_URL")
