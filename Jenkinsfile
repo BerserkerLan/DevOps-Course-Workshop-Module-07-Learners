@@ -31,7 +31,7 @@ pipeline {
     }
     post {
         always {
-            slackSend color: "good", message: "Message from Jenkins Pipeline, I did it", token: "$SLACK_WEBHOOK_URL", channel: "#general" 
+            slackSend color: "good", message: "Message from Jenkins Pipeline, I did it", token: "$SLACK_WEBHOOK_URL", channel: "#general", username: "webhookbot"
         }
     }
 }
