@@ -1,13 +1,9 @@
 pipeline {
-    agent any
-
+    agent { docker { image 'node:14-alpine' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh 'dotnet restore'
-                sh 'dotnet build'
-                sh 'dotnet test' 
-                
+                sh 'npm --version'
             }
         }
     }
