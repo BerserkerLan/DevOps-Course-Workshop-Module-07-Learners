@@ -1,5 +1,10 @@
 pipeline {
     agent none
+     environment {
+        DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
+        // ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        // SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    }
     stages {
         stage('Back-end') {
             agent {
