@@ -2,6 +2,7 @@ pipeline {
     agent none
      environment {
         DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
+        SLACK_WEBHOOK_URL = credentials("SLACK_WEBHOOK_URL")
         // ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     }
     stages {
